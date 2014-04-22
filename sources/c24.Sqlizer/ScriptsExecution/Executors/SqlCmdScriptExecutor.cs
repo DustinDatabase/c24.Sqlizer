@@ -7,19 +7,19 @@ namespace c24.Sqlizer.ScriptsExecution.Executors
 {
     public class SqlCmdScriptExecutor : IScriptsExecutor
     {
-        private readonly string _serverName;
-        private readonly string _databaseName;
-        private readonly string _login;
-        private readonly string _password;
-        private readonly ILogger _logger;
+        private readonly string serverName;
+        private readonly string databaseName;
+        private readonly string login;
+        private readonly string password;
+        private readonly ILogger logger;
 
         public SqlCmdScriptExecutor(string serverName, string databaseName, string login, string password, ILogger logger)
         {
-            _serverName = serverName;
-            _databaseName = databaseName;
-            _login = login;
-            _password = password;
-            _logger = logger;
+            this.serverName = serverName;
+            this.databaseName = databaseName;
+            this.login = login;
+            this.password = password;
+            this.logger = logger;
         }
 
         public void Execute(string scriptFileName)
@@ -30,7 +30,7 @@ namespace c24.Sqlizer.ScriptsExecution.Executors
                 .WithFileName(@"sqlcmd.exe")
                 .WithArguments(args);
 
-            _logger.Log("Executing file: {0}", scriptFileName);
+            this.logger.Log("Executing file: {0}", scriptFileName);
 
             var result = CommandLineProgram.Run(startInfo);
 
@@ -53,7 +53,7 @@ namespace c24.Sqlizer.ScriptsExecution.Executors
         {
             if (!string.IsNullOrWhiteSpace(text))
             {
-                _logger.Log(text);   
+                this.logger.Log(text);   
             }            
         }
 
@@ -61,15 +61,15 @@ namespace c24.Sqlizer.ScriptsExecution.Executors
         {
             var args = new List<string>();
 
-            args.Add(string.Format("-S {0}", _serverName));
+            args.Add(string.Format("-S {0}", this.serverName));
 
-            if (!string.IsNullOrWhiteSpace(_login) && !string.IsNullOrWhiteSpace(_password))
+            if (!string.IsNullOrWhiteSpace(this.login) && !string.IsNullOrWhiteSpace(this.password))
             {
-                args.Add(string.Format("-U {0}", _login));
-                args.Add(string.Format("-P {0}", _password));
+                args.Add(string.Format("-U {0}", this.login));
+                args.Add(string.Format("-P {0}", this.password));
             }
 
-            args.Add(string.Format("-d {0}", _databaseName));
+            args.Add(string.Format("-d {0}", this.databaseName));
             args.Add(string.Format("-i {0}", scriptFileName));
             args.Add("-b");
 

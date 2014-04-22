@@ -7,16 +7,21 @@ namespace c24.Sqlizer.DirectoryValidation.Rules
 {
     public class FileNamePatternValidationRule : IDirectoryValidationRule
     {
-        private readonly string _pattern;
+        private readonly string pattern;
 
         public FileNamePatternValidationRule(string pattern)
         {
-            _pattern = pattern;
+            this.pattern = pattern;
         }
 
         public void Validate(string directoryPath)
         {
-            var regex = new Regex(_pattern);
+            if (string.IsNullOrWhiteSpace(this.pattern))
+            {
+                return;
+            }
+
+            var regex = new Regex(this.pattern);
 
             var directory = new DirectoryInfo(directoryPath);
 

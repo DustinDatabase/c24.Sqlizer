@@ -57,12 +57,14 @@
     <Compile Include="DirectoryValidation\Rules\EmptyDirectoryValidationRule.cs" />
     <Compile Include="DirectoryValidation\Rules\FileNamePatternValidationRule.cs" />
     <Compile Include="DirectoryValidation\Rules\FilesExtensionValidationRule.cs" />
+    <Compile Include="DirectoryValidation\Rules\FilesOrderValidationRule.cs" />
     <Compile Include="DirectoryValidation\Rules\SubdirectoriesValidationRule.cs" />
     <Compile Include="DirectoryValidation\Validators\DirectoryValidator.cs" />
     <Compile Include="Exceptions\DirectoryHasSubdirectoriesException.cs" />
     <Compile Include="Exceptions\EmptyDirectoryException.cs" />
     <Compile Include="Exceptions\FileNameFormatException.cs" />
     <Compile Include="Exceptions\UnsupportedFileExtensionException.cs" />
+    <Compile Include="Exceptions\WrongOrderException.cs" />
     <Compile Include="Infrastructure\Logging\ILogger.cs" />
     <Compile Include="Infrastructure\Logging\SimpleLogger.cs" />
     <Compile Include="Program.cs" />
@@ -72,7 +74,6 @@
     <Compile Include="Sqlizer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

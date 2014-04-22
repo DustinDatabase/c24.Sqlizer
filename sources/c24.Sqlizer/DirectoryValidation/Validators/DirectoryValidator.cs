@@ -4,16 +4,16 @@ namespace c24.Sqlizer.DirectoryValidation.Validators
 {
     public class DirectoryValidator : IDirectoryValidator
     {
-        private readonly IEnumerable<IDirectoryValidationRule> _directoryValidationRules;
+        private readonly IEnumerable<IDirectoryValidationRule> directoryValidationRules;
 
         public DirectoryValidator(IEnumerable<IDirectoryValidationRule> directoryValidationRules)
         {
-            _directoryValidationRules = directoryValidationRules;
+            this.directoryValidationRules = directoryValidationRules;
         }
 
         public void Validate(string directoryPath)
         {
-            foreach (var directoryValidationRule in _directoryValidationRules)
+            foreach (var directoryValidationRule in this.directoryValidationRules)
             {
                 directoryValidationRule.Validate(directoryPath);
             }

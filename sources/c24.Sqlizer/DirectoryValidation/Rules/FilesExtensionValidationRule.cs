@@ -18,7 +18,7 @@ namespace c24.Sqlizer.DirectoryValidation.Rules
 
             if (hasForbiddenFiles)
             {
-                throw new UnsupportedFileExtensionException(string.Format("Only *.{0} files are allowed", AllowedExtension));
+                throw new UnsupportedFileExtensionException(string.Format("Only *{0} files are allowed", AllowedExtension));
             }
         }
     }

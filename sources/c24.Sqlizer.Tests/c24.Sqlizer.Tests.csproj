@@ -55,6 +55,7 @@
     <Compile Include="DirectoryValidation\Rules\EmptyDirectoryValidationRuleTests.cs" />
     <Compile Include="DirectoryValidation\Rules\FileExtensionDirectoryValidationRuleTests.cs" />
     <Compile Include="DirectoryValidation\Rules\FileNamePatternValidationRuleTests.cs" />
+    <Compile Include="DirectoryValidation\Rules\FilesOrderValidationRuleTests.cs" />
     <Compile Include="DirectoryValidation\Rules\SubdirectoryValidationRuleTests.cs" />
     <Compile Include="FileSystemHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

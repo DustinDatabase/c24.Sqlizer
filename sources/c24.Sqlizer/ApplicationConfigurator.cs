@@ -14,17 +14,16 @@ namespace c24.Sqlizer
             string databaseName,
             string login,
             string password,
+            string fileNamesPattern,
             string logDirectory)
         {            
-            var logger = new SimpleLogger(logDirectory);
-
-            var filesPattern = ConfigurationManager.AppSettings["filesPattern"];            
+            var logger = new SimpleLogger(logDirectory);            
 
             var validator = new DirectoryValidator(new IDirectoryValidationRule[]
             {
                 new EmptyDirectoryValidationRule(), 
                 new SubdirectoriesValidationRule(), 
-                new FileNamePatternValidationRule(filesPattern), 
+                new FileNamePatternValidationRule(fileNamesPattern), 
                 new FilesExtensionValidationRule(), 
             });
 

@@ -23,6 +23,7 @@ namespace c24.Sqlizer
             [Required(Description = "Database name")] string databaseName,
             [Optional(null, Description = "Login for sql server")] string login,
             [Optional(null, Description = "Password for sql server")] string password,
+            [Optional(null, Description = "Regular expression for files name validation")]string fileNamesPattern,
             [Optional(null, Description = "Directory for log file")]string logDirectory)
         {
             var sqlizer = ApplicationConfigurator.GetSqlizerInstance(scriptsDirectory,
@@ -30,6 +31,7 @@ namespace c24.Sqlizer
                                                                     databaseName,
                                                                     login,
                                                                     password,
+                                                                    fileNamesPattern,
                                                                     logDirectory);
 
             sqlizer.RunDatabaseScripts(scriptsDirectory);

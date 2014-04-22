@@ -14,7 +14,7 @@ namespace c24.Sqlizer.Tests
     public class SqlizerTests
     {
         [Test]
-        public void sqlizer_should_throw_argument_exception_if_script_dir_does_not_exists()
+        public void Sqlizer_Should_Throw_Argument_Exception_If_Script_Dir_Does_Not_Exists()
         {
             // arrange
             var dir = FileSystemHelper.CreateTempWorkingDirectory();
@@ -35,7 +35,7 @@ namespace c24.Sqlizer.Tests
         }
 
         [Test]
-        public void sqlizer_should_order_files_for_execution()
+        public void Sqlizer_Should_Order_Files_For_Execution()
         {
             // arrange
             var dir = FileSystemHelper.CreateTempWorkingDirectory();
@@ -64,12 +64,12 @@ namespace c24.Sqlizer.Tests
             // assert
             actualResult.ShouldBeEquivalentTo(new List<string>
             {
-                "01_script.sql",
-                "02_script.sql",
-                "03_script.sql",
-                "10_script.sql",
-                "15_script.sql",
-                "20_script.sql"
+                Path.Combine(dir, "01_script.sql"),
+                Path.Combine(dir, "02_script.sql"),
+                Path.Combine(dir, "03_script.sql"),
+                Path.Combine(dir, "10_script.sql"),
+                Path.Combine(dir, "15_script.sql"),
+                Path.Combine(dir, "20_script.sql")
             });
         }
     }
