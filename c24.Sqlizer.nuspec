@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>c24.Sqlizer</id>
+    <version>1.0.0</version>
+    <authors>CHECK24 Development Team</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>DB migrations runner</description>
+    <projectUrl>https://github.com/CHECK24/c24.Sqlizer</projectUrl>
+    <licenseUrl>https://github.com/CHECK24/c24.Sqlizer</licenseUrl>
+  </metadata>
+  <files>
+    <file src="sources\c24.Sqlizer\bin\Release\c24.Sqlizer.exe" target="lib\net40" />
+    <file src="sources\c24.Sqlizer\bin\Release\c24.Runman.dll" target="lib\net40" />
+    <file src="sources\c24.Sqlizer\bin\Release\NConsoler.dll" target="lib\net40" />
+  </files>
+</package>
