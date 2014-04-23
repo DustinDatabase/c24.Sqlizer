@@ -31,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentAssertions">
@@ -52,12 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DirectoryValidation\DirectoryValidationRulesProviderTests.cs" />
     <Compile Include="DirectoryValidation\Rules\EmptyDirectoryValidationRuleTests.cs" />
     <Compile Include="DirectoryValidation\Rules\FileExtensionDirectoryValidationRuleTests.cs" />
     <Compile Include="DirectoryValidation\Rules\FileNamePatternValidationRuleTests.cs" />
     <Compile Include="DirectoryValidation\Rules\FilesOrderValidationRuleTests.cs" />
     <Compile Include="DirectoryValidation\Rules\SubdirectoryValidationRuleTests.cs" />
     <Compile Include="FileSystemHelper.cs" />
+    <Compile Include="PrerequisitesValidation\PrerequisitesValidationRulesProviderTests.cs" />
+    <Compile Include="PrerequisitesValidation\SqlCmdPrerequisiteValidationRuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlizerTests.cs" />
   </ItemGroup>

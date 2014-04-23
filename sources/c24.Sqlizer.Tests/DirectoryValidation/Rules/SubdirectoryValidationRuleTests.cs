@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using c24.Sqlizer.DirectoryValidation.Rules;
 using c24.Sqlizer.Exceptions;
 using FluentAssertions;
@@ -11,7 +10,7 @@ namespace c24.Sqlizer.Tests.DirectoryValidation.Rules
     public class SubdirectoryValidationRuleTests
     {               
         [Test]
-        public void should_throw_exception_if_directory_has_subdirectories()
+        public void Should_Throw_Exception_If_Directory_Has_Subdirectories()
         {
             // arrange
             var workingDirectory = FileSystemHelper.CreateTempWorkingDirectory();

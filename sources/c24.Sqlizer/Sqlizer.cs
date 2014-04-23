@@ -4,28 +4,36 @@ using System.IO;
 using System.Linq;
 using c24.Sqlizer.DirectoryValidation;
 using c24.Sqlizer.Infrastructure.Logging;
+using c24.Sqlizer.PrerequisitesValidation;
 using c24.Sqlizer.ScriptsExecution;
 
 namespace c24.Sqlizer
 {
     public class Sqlizer
-    {        
-        private readonly IDirectoryValidator _directoryValidator;
-        private readonly IScriptsExecutor _scriptsExecutor;
-        private readonly ILogger _logger;
+    {
+        private readonly IEnumerable<IDirectoryValidationRule> directoryValidationRules;
+        private readonly IEnumerable<IPrerequisiteValidationRule> prerequisiteValidationRules;
+        private readonly IScriptsExecutor scriptsExecutor;
+        private readonly ILogger logger;
 
-        public Sqlizer(IDirectoryValidator directoryValidator, IScriptsExecutor scriptsExecutor, ILogger logger)
-        {
-            _directoryValidator = directoryValidator;
-            _scriptsExecutor = scriptsExecutor;
-            _logger = logger;
+        public Sqlizer(IEnumerable<IDirectoryValidationRule> directoryValidationRules,
+            IEnumerable<IPrerequisiteValidationRule> prerequisiteValidationRules,
+            IScriptsExecutor scriptsExecutor,
+            ILogger logger)
+        {            
+            this.directoryValidationRules = directoryValidationRules;
+            this.prerequisiteValidationRules = prerequisiteValidationRules;
+            this.scriptsExecutor = scriptsExecutor;
+            this.logger = logger;
         }
 
-        public void RunDatabaseScripts(string scriptsDirectory)
+        public bool RunDatabaseScripts(string scriptsDirectory)
         {
             try
             {
-                _logger.Log("# Start application #");
+                this.logger.Log("# Start application #");
+
+                ValidatePrerequisites();
 
                 ValidateDirectoryPath(scriptsDirectory);
 
@@ -35,18 +43,20 @@ namespace c24.Sqlizer
 
                 foreach (var script in scripts)
                 {
-                    _scriptsExecutor.Execute(script);
+                    this.scriptsExecutor.Execute(script);
                 }
+
+                return true;
             }
             catch (Exception e)
             {
-                _logger.Log(e.Message);
+                this.logger.Log(e);
 
-                throw;
+                return false;
             }
             finally
             {
-                _logger.Log("# Close application #\r\n\r\n");
+                this.logger.Log("# Close application #\r\n\r\n");
             }
         }
 
@@ -58,14 +68,25 @@ namespace c24.Sqlizer
                 .ToList();
         }
 
+        private void ValidatePrerequisites()
+        {
+            foreach (var prerequisiteValidationRule in prerequisiteValidationRules)
+            {
+                prerequisiteValidationRule.Validate();
+            }
+        }
+
         private void ValidateDirectoryContent(string scriptsDirectory)
         {
-            _directoryValidator.Validate(scriptsDirectory);
+            foreach (var directoryValidationRule in directoryValidationRules)
+            {
+                directoryValidationRule.Validate(scriptsDirectory);
+            }
         }
 
         private void ValidateDirectoryPath(string scriptsDirectory)
         {
-            _logger.Log("Check if scipts directory exists: {0}", scriptsDirectory);
+            this.logger.Log("Check if scripts directory exists: {0}", scriptsDirectory);
 
             var directory = new DirectoryInfo(scriptsDirectory);
 
@@ -74,7 +95,7 @@ namespace c24.Sqlizer
                 throw new ArgumentException(string.Format("Directory {0} does not exist", scriptsDirectory));
             }
 
-            _logger.Log("Directory {0} exists", scriptsDirectory);
+            this.logger.Log("Directory {0} exists", scriptsDirectory);
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+
 using c24.Sqlizer.DirectoryValidation;
 using c24.Sqlizer.Infrastructure.Logging;
+using c24.Sqlizer.PrerequisitesValidation;
 using c24.Sqlizer.ScriptsExecution;
 using FluentAssertions;
 using Moq;
@@ -20,18 +23,20 @@ namespace c24.Sqlizer.Tests
             var dir = FileSystemHelper.CreateTempWorkingDirectory();
 
             FileSystemHelper.RemoveDirectory(dir);
-
-            var directoryValidator = new Mock<IDirectoryValidator>();
+            
             var scriptExecutor = new Mock<IScriptsExecutor>();
             var logger = new Mock<ILogger>();
 
-            var sqlizer = new Sqlizer(directoryValidator.Object, scriptExecutor.Object, logger.Object);
+            var sqlizer = new Sqlizer(Enumerable.Empty<IDirectoryValidationRule>(),
+                Enumerable.Empty<IPrerequisiteValidationRule>(),
+                scriptExecutor.Object,
+                logger.Object);
 
-            // act & assert
-            Action action = () => sqlizer.RunDatabaseScripts(dir);
+            // act 
+            var result = sqlizer.RunDatabaseScripts(dir);
 
-            action.ShouldThrow<ArgumentException>()
-                .WithMessage(string.Format("Directory {0} does not exist", dir));
+            // assert
+            result.ShouldBeEquivalentTo(false);
         }
 
         [Test]
@@ -48,15 +53,17 @@ namespace c24.Sqlizer.Tests
             FileSystemHelper.CreateFile(baseDirectory: dir, fileName: "15_script.sql");
 
             var actualResult = new List<string>();
-
-            var directoryValidator = new Mock<IDirectoryValidator>();
+            
             var scriptExecutor = new Mock<IScriptsExecutor>();
             scriptExecutor.Setup(s => s.Execute(It.IsAny<string>()))
                 .Callback<string>(actualResult.Add);
 
             var logger = new Mock<ILogger>();
 
-            var sqlizer = new Sqlizer(directoryValidator.Object, scriptExecutor.Object, logger.Object);
+            var sqlizer = new Sqlizer(Enumerable.Empty<IDirectoryValidationRule>(),
+                Enumerable.Empty<IPrerequisiteValidationRule>(),
+                scriptExecutor.Object,
+                logger.Object);
             
             // act 
             sqlizer.RunDatabaseScripts(dir);

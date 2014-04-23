@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using c24.Sqlizer.Infrastructure.Logging;
+
 using NConsoler;
 
 namespace c24.Sqlizer
@@ -18,6 +13,7 @@ namespace c24.Sqlizer
         
 
         [Action]
+        // ReSharper disable once UnusedMember.Global
         public static void Run([Required(Description = "Directory with *.sql scripts")] string scriptsDirectory,
             [Required(Description = "SQL server and instance name")] string server,
             [Required(Description = "Database name")] string databaseName,
@@ -26,15 +22,19 @@ namespace c24.Sqlizer
             [Optional(null, Description = "Regular expression for files name validation")]string fileNamesPattern,
             [Optional(null, Description = "Directory for log file")]string logDirectory)
         {
-            var sqlizer = ApplicationConfigurator.GetSqlizerInstance(scriptsDirectory,
-                                                                    server,
+            var sqlizer = ApplicationConfigurator.GetSqlizerInstance(server,
                                                                     databaseName,
                                                                     login,
                                                                     password,
                                                                     fileNamesPattern,
                                                                     logDirectory);
 
-            sqlizer.RunDatabaseScripts(scriptsDirectory);
+            var sucess = sqlizer.RunDatabaseScripts(scriptsDirectory);
+
+            if (!sucess)
+            {
+                Environment.Exit(1);
+            }
         }
     }
 }

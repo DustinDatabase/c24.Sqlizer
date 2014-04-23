@@ -10,7 +10,7 @@ namespace c24.Sqlizer.Tests.DirectoryValidation.Rules
     public class FileNamePatternValidationRuleTests
     {
         [Test]
-        public void should_throw_exception_if_file_name_does_not_match_pattern()
+        public void Should_Throw_Exception_If_File_Name_Does_Not_Match_Pattern()
         {
             // arrange
             var workingDirectory = FileSystemHelper.CreateTempWorkingDirectory();

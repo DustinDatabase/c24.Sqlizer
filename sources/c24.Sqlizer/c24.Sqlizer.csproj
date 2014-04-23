@@ -26,7 +26,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -52,21 +52,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationConfigurator.cs" />
+    <Compile Include="DirectoryValidation\DirectoryValidationRulesProvider.cs" />
     <Compile Include="DirectoryValidation\IDirectoryValidationRule.cs" />
-    <Compile Include="DirectoryValidation\IDirectoryValidator.cs" />
     <Compile Include="DirectoryValidation\Rules\EmptyDirectoryValidationRule.cs" />
     <Compile Include="DirectoryValidation\Rules\FileNamePatternValidationRule.cs" />
     <Compile Include="DirectoryValidation\Rules\FilesExtensionValidationRule.cs" />
     <Compile Include="DirectoryValidation\Rules\FilesOrderValidationRule.cs" />
     <Compile Include="DirectoryValidation\Rules\SubdirectoriesValidationRule.cs" />
-    <Compile Include="DirectoryValidation\Validators\DirectoryValidator.cs" />
     <Compile Include="Exceptions\DirectoryHasSubdirectoriesException.cs" />
     <Compile Include="Exceptions\EmptyDirectoryException.cs" />
     <Compile Include="Exceptions\FileNameFormatException.cs" />
+    <Compile Include="Exceptions\SqlCmdNotFoundException.cs" />
     <Compile Include="Exceptions\UnsupportedFileExtensionException.cs" />
     <Compile Include="Exceptions\WrongOrderException.cs" />
     <Compile Include="Infrastructure\Logging\ILogger.cs" />
     <Compile Include="Infrastructure\Logging\SimpleLogger.cs" />
+    <Compile Include="PrerequisitesValidation\IPrerequisiteValidationRule.cs" />
+    <Compile Include="PrerequisitesValidation\PrerequisitesValidationRulesProvider.cs" />
+    <Compile Include="PrerequisitesValidation\Rules\SqlCmdPrerequisiteValidationRule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptsExecution\Executors\SqlCmdScriptExecutor.cs" />
