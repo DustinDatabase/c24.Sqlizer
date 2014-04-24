@@ -13,10 +13,10 @@ namespace c24.Sqlizer.Tests.DirectoryValidation.Rules
         public void Should_Throw_Exception_If_Gap_Between_Files()
         {
             // arrange
-            var workingDirectory = FileSystemHelper.CreateTempWorkingDirectory();
+            var workingDirectory = TestFileSystem.CreateTempWorkingDirectory();
 
-            FileSystemHelper.CreateFile(baseDirectory: workingDirectory, fileName: "0001_script.sql");            
-            FileSystemHelper.CreateFile(baseDirectory: workingDirectory, fileName: "0003_script.sql");
+            TestFileSystem.CreateFile(baseDirectory: workingDirectory, fileName: "0001_script.sql");            
+            TestFileSystem.CreateFile(baseDirectory: workingDirectory, fileName: "0003_script.sql");
 
             var rule = new FilesOrderValidationRule();
             

@@ -13,9 +13,9 @@ namespace c24.Sqlizer.Tests.DirectoryValidation.Rules
         public void Should_Throw_Exception_If_Directory_Has_Subdirectories()
         {
             // arrange
-            var workingDirectory = FileSystemHelper.CreateTempWorkingDirectory();
+            var workingDirectory = TestFileSystem.CreateTempWorkingDirectory();
 
-            FileSystemHelper.CreateSubdirectory(baseDirectory: workingDirectory, subdirectoryName: "subdir");
+            TestFileSystem.CreateSubdirectory(baseDirectory: workingDirectory, subdirectoryName: "subdir");
 
             var rule = new SubdirectoriesValidationRule();
 

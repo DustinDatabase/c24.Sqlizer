@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using c24.Sqlizer.DirectoryValidation;
 using c24.Sqlizer.Infrastructure.Logging;
 using c24.Sqlizer.PrerequisitesValidation;
@@ -17,20 +15,17 @@ namespace c24.Sqlizer.Tests
     public class SqlizerTests
     {
         [Test]
-        public void Sqlizer_Should_Throw_Argument_Exception_If_Script_Dir_Does_Not_Exists()
+        public void Sqlizer_should_return_false_if_something_goes_wrong()
         {
             // arrange
-            var dir = FileSystemHelper.CreateTempWorkingDirectory();
+            var dir = TestFileSystem.CreateTempWorkingDirectory();
 
-            FileSystemHelper.RemoveDirectory(dir);
-            
-            var scriptExecutor = new Mock<IScriptsExecutor>();
-            var logger = new Mock<ILogger>();
+            TestFileSystem.RemoveDirectory(dir);                       
 
             var sqlizer = new Sqlizer(Enumerable.Empty<IDirectoryValidationRule>(),
                 Enumerable.Empty<IPrerequisiteValidationRule>(),
-                scriptExecutor.Object,
-                logger.Object);
+                Mock.Of<IScriptsExecutor>(),
+                Mock.Of<ILogger>());
 
             // act 
             var result = sqlizer.RunDatabaseScripts(dir);
@@ -43,27 +38,25 @@ namespace c24.Sqlizer.Tests
         public void Sqlizer_Should_Order_Files_For_Execution()
         {
             // arrange
-            var dir = FileSystemHelper.CreateTempWorkingDirectory();
+            var dir = TestFileSystem.CreateTempWorkingDirectory();
 
-            FileSystemHelper.CreateFile(baseDirectory: dir, fileName: "01_script.sql");
-            FileSystemHelper.CreateFile(baseDirectory: dir, fileName: "03_script.sql");
-            FileSystemHelper.CreateFile(baseDirectory: dir, fileName: "20_script.sql");
-            FileSystemHelper.CreateFile(baseDirectory: dir, fileName: "02_script.sql");
-            FileSystemHelper.CreateFile(baseDirectory: dir, fileName: "10_script.sql");
-            FileSystemHelper.CreateFile(baseDirectory: dir, fileName: "15_script.sql");
+            TestFileSystem.CreateFile(baseDirectory: dir, fileName: "01_script.sql");
+            TestFileSystem.CreateFile(baseDirectory: dir, fileName: "03_script.sql");
+            TestFileSystem.CreateFile(baseDirectory: dir, fileName: "20_script.sql");
+            TestFileSystem.CreateFile(baseDirectory: dir, fileName: "02_script.sql");
+            TestFileSystem.CreateFile(baseDirectory: dir, fileName: "10_script.sql");
+            TestFileSystem.CreateFile(baseDirectory: dir, fileName: "15_script.sql");
 
             var actualResult = new List<string>();
             
             var scriptExecutor = new Mock<IScriptsExecutor>();
             scriptExecutor.Setup(s => s.Execute(It.IsAny<string>()))
-                .Callback<string>(actualResult.Add);
-
-            var logger = new Mock<ILogger>();
+                .Callback<string>(actualResult.Add);            
 
             var sqlizer = new Sqlizer(Enumerable.Empty<IDirectoryValidationRule>(),
                 Enumerable.Empty<IPrerequisiteValidationRule>(),
                 scriptExecutor.Object,
-                logger.Object);
+                Mock.Of<ILogger>());
             
             // act 
             sqlizer.RunDatabaseScripts(dir);

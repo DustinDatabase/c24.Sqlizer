@@ -13,7 +13,7 @@ namespace c24.Sqlizer.Tests.DirectoryValidation.Rules
         public void Should_Throw_Exception_If_Directory_Is_Empty()
         {
             // arrange
-            var workingDirectory = FileSystemHelper.CreateTempWorkingDirectory();
+            var workingDirectory = TestFileSystem.CreateTempWorkingDirectory();
 
             var rule = new EmptyDirectoryValidationRule();
 

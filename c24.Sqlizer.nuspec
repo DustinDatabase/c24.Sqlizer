@@ -5,7 +5,7 @@
     <version>1.0.0</version>
     <authors>CHECK24 Development Team</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>DB migrations runner</description>
+    <description>Tool that runs *.sql files against database. Use it for schema and/or data migration.</description>
     <projectUrl>https://github.com/CHECK24/c24.Sqlizer</projectUrl>
     <licenseUrl>https://github.com/CHECK24/c24.Sqlizer</licenseUrl>
   </metadata>

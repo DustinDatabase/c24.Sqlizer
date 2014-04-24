@@ -2,7 +2,7 @@
 
 namespace c24.Sqlizer.Tests
 {
-    public static class FileSystemHelper
+    public static class TestFileSystem
     {
         public static string CreateTempWorkingDirectory()
         {

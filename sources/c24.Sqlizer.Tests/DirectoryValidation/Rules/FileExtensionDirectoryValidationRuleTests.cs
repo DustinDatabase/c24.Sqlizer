@@ -13,9 +13,9 @@ namespace c24.Sqlizer.Tests.DirectoryValidation.Rules
         public void Should_Throw_Exception_When_Forbidden_Files_Found()
         {
             // arrange
-            var workingDirectory = FileSystemHelper.CreateTempWorkingDirectory();
+            var workingDirectory = TestFileSystem.CreateTempWorkingDirectory();
 
-            FileSystemHelper.CreateFile(baseDirectory: workingDirectory, fileName: "readme.txt");
+            TestFileSystem.CreateFile(baseDirectory: workingDirectory, fileName: "readme.txt");
 
             var rule = new FilesExtensionValidationRule();
            
