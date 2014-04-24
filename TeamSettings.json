@@ -1,0 +1,11 @@
+{
+    "layers": [{
+        "id": "F0B47A2A84C84BA38AC884675483C3DE",
+        "relativePath": "c24-CSharp-Settings.DotSettings",
+        "relativePriority": 1
+    }, {
+        "id": "B3EEAD2BD91042EC8E45199EA4B8BFFB",
+        "relativePath": "Aviva-CSharp-Settings.DotSettings",
+        "relativePriority": 2
+    }]
+}
