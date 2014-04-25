@@ -34,14 +34,11 @@ namespace c24.Sqlizer.ScriptsExecution.Executors
 
             var result = CommandLineProgram.Run(startInfo);
 
-            if (result.ExitCode == 0)
-            {                
-                LogIfHasSomething(result.Output);
-            }
-            else
-            {
-                LogIfHasSomething(result.Error);
+            LogIfHasSomething(result.Error);
+            LogIfHasSomething(result.Output);
 
+            if (result.ExitCode != 0)
+            {                
                 throw new InvalidOperationException(
                     string.Format(
                         "Executing {0} finished with the exit code: {1}. Please check log file for more details.",
