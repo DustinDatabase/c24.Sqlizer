@@ -13,7 +13,7 @@ namespace c24.Sqlizer.PrerequisitesValidation.Rules
         public void Validate()
         {
             var startInfo = CommandLineProgram.Prepare()
-               .WithFileName(@"sqlcmdbb.exe")
+               .WithFileName(@"sqlcmd.exe")
                .WithArguments(new []{ "-?" });
 
             try
