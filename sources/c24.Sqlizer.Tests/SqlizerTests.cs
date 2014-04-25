@@ -15,7 +15,7 @@ namespace c24.Sqlizer.Tests
     public class SqlizerTests
     {
         [Test]
-        public void Sqlizer_should_return_false_if_something_goes_wrong()
+        public void Sqlizer_should_return_false_if_anything_goes_wrong()
         {
             // arrange
             var dir = TestFileSystem.CreateTempWorkingDirectory();

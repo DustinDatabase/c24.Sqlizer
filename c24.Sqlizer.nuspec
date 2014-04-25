@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>c24.Sqlizer</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>CHECK24 Development Team</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Tool that runs *.sql files against database. Use it for schema and/or data migration.</description>
@@ -10,8 +10,8 @@
     <licenseUrl>https://github.com/CHECK24/c24.Sqlizer</licenseUrl>
   </metadata>
   <files>
-    <file src="sources\c24.Sqlizer\bin\Release\c24.Sqlizer.exe" target="lib\net40" />
-    <file src="sources\c24.Sqlizer\bin\Release\c24.Runman.dll" target="lib\net40" />
-    <file src="sources\c24.Sqlizer\bin\Release\NConsoler.dll" target="lib\net40" />
+    <file src="sources\c24.Sqlizer\bin\Release\c24.Sqlizer.exe" target="tools" />
+    <file src="sources\c24.Sqlizer\bin\Release\c24.Runman.dll" target="tools" />
+    <file src="sources\c24.Sqlizer\bin\Release\NConsoler.dll" target="tools" />
   </files>
 </package>
